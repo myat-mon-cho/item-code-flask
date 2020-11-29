@@ -10,19 +10,22 @@
  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous"> -->
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
 <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 
 <script type="text/javascript">
-$(document).ready( function () {
-    $('#MMCtable').DataTable(
-	
-);
-} );
+$( '#success' ).click(function() {
+ $('#successUpdate').show();
+
+
+});
 </script>
+
 <!-- Bootstrap CSS and JS -->
+
+
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <!-- End of MMC Data Table Initialization -->
     <title>Bootstrap Material Admin by Bootstrapious.com</title>
     <meta name="description" content="">
@@ -36,6 +39,7 @@ $(document).ready( function () {
     <!-- Fontastic Custom icon font-->
    <!--  <link rel="stylesheet" href="../css/fontastic.css"> -->
   <link rel="stylesheet" href = "{{ url_for('static', filename = 'fontastic1.css') }}">
+ <link rel="stylesheet" href = "{{ url_for('static', filename = 'tabs.css') }}">
     <!-- Google fonts - Poppins -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
     <!-- theme stylesheet-->
@@ -186,10 +190,7 @@ $(document).ready( function () {
             <div class="container-fluid">
 
               <h2 class="no-margin-bottom">Product Code</h2>
-	<div class="col-sm-0 offset-sm-11">
-	<input type="submit" value="Create" class="btn btn-primary"></div>
-
-            </div>
+	
           </header>
           <!-- Breadcrumb-->
            <!-- <div class="breadcrumb-holder container-fluid">
@@ -201,48 +202,181 @@ $(document).ready( function () {
           <section class="tables">   
 <div class="container-fluid">
 	<div class="row bg-white has-shadow">
+<!-- Tabs -->
+<div class="container">
+
+  <div class="container">
+    <div class="card">
+      <div class="card-header">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#detail">Detail</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#edit">Edit</a>
+          </li>
+         
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div id="detail" class="container tab-pane active"><br>
+      <form >
+{% for row in values %}
+    <fieldset disabled>
+        <div class="form-group row">
+            <label for="Id" class="col-sm-2 col-form-label">Id</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="id1" placeholder= {{ row[0] }}>
+            </div>
+        </div>
+         <div class="form-group row">
+            <label for="name" class="col-sm-2 col-form-label">Name</label>
+            <div class="col-sm-10">
+	<input type="text"  class="form-control" value= "{{ row[1] }}">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="name" class="col-sm-2 col-form-label">Variant Detail</label>
+            <div class="col-sm-10">
+
+                 {% if row[2] == "" %}
+                  <input type="text"  class="form-control" value= "Not Existing">
+	{% else %}
+                  <input type="text"  class="form-control" value= "{{ row[2] }}">
+	{% endif %}
+            </div>
+        </div>
+          <div class="form-group row">
+            <label for="name" class="col-sm-2 col-form-label">Identifier</label>
+            <div class="col-sm-10">
+	<input type="text"  class="form-control" value= "{{ row[3] }}">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="name" class="col-sm-2 col-form-label">Variant</label>
+            <div class="col-sm-10">
+	<input type="text"  class="form-control" value= "{{ row[4] }}">
+            </div>
+        </div>
+       <div class="form-group row">
+            <label for="name" class="col-sm-2 col-form-label">Formula Type</label>
+            <div class="col-sm-10">
+	<input type="text"  class="form-control" value= "{{ row[5] }}">
+            </div>
+        </div>
+       <div class="form-group row">
+            <label for="name" class="col-sm-2 col-form-label">Group Code</label>
+            <div class="col-sm-10">
+	<input type="text"  class="form-control" value= "{{ row[6] }}">
+            </div>
+        </div>
+         <div class="form-group row">
+            <label for="name" class="col-sm-2 col-form-label">SKU</label>
+            <div class="col-sm-10">
+	<input type="text"  class="form-control" value= "{{ row[7] }}">
+            </div>
+        </div>
+       <div class="form-group row">
+            <label for="name" class="col-sm-2 col-form-label">Code</label>
+            <div class="col-sm-10">
+	<input type="text"  class="form-control" value= "{{ row[8] }}">
+            </div>
+        </div>
+    </fieldset>
+{% endfor %}
+</form>
+    </div>
+    <div id="edit" class="container tab-pane fade"><br>
+
+
+      <form action = "http://localhost:5000/updateSuccess" method = "post">
+<div class="alert alert-success" role="alert" id="successUpdate" style="display:none;">
+  This is a success alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+</div>
+
+{% for row in values %}
+    <fieldset>
+        <div class="form-group row">
+            <label for="Id" class="col-sm-2 col-form-label">Id</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="id1" value= "{{ row[0] }}"  name="p_id" readonly >
+            </div>
+        </div>
+         <div class="form-group row">
+            <label for="name" class="col-sm-2 col-form-label">Name</label>
+            <div class="col-sm-10">
+	<input type="text"  class="form-control" value= "{{ row[1] }}"  name="p_name" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="name" class="col-sm-2 col-form-label">Variant Detail</label>
+            <div class="col-sm-10">
+
+                 {% if row[2] == "" %}
+                  <input type="text"  class="form-control" value= "Not Existing" name="v_description">
+	{% else %}
+                  <input type="text"  class="form-control" value= "{{ row[2] }}" name="v_description">
+	{% endif %}
+            </div>
+        </div>
+          <div class="form-group row">
+            <label for="name" class="col-sm-2 col-form-label">Identifier</label>
+            <div class="col-sm-10">
+	<input type="text"  class="form-control" value= "{{ row[3] }}" name="p_identifier">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="name" class="col-sm-2 col-form-label">Variant</label>
+            <div class="col-sm-10">
+	<input type="text"  class="form-control" value= "{{ row[4] }}" name="p_variant">
+            </div>
+        </div>
+       <div class="form-group row">
+            <label for="name" class="col-sm-2 col-form-label">Formula Type</label>
+            <div class="col-sm-10">
+	<input type="text"  class="form-control" value= "{{ row[5] }}" name="f_type">
+            </div>
+        </div>
+       <div class="form-group row">
+            <label for="name" class="col-sm-2 col-form-label">Group Code</label>
+            <div class="col-sm-10">
+	<input type="text"  class="form-control" value= "{{ row[6] }}" name="g_code" >
+            </div>
+        </div>
+         <div class="form-group row">
+            <label for="name" class="col-sm-2 col-form-label">SKU</label>
+            <div class="col-sm-10">
+	<input type="text"  class="form-control" value= "{{ row[7] }}" name="sku" >
+            </div>
+        </div>
+       <div class="form-group row">
+            <div class="col-sm-0 offset-sm-11">
+	<input type="submit" class="btn btn-primary" value="Update">
+            </div>
+        </div>
+    </fieldset>
+{% endfor %}
+</form>
+    </div>
+    <div id="menu2" class="container tab-pane fade"><br>
+      <h3>Menu 2</h3>
+      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+    </div>
+  </div>
+</div>
+
 
 <!-- MMC MySQL DataTable -->
 
-<table style="width:100%" id="MMCtable" class="display compact">
-<thead>
-  <tr>
-    <th>Id</th>
-    <th>Name</th>
-    <th>Variant Description</th>
-   <th>Unique Identifier</th>
-   <th>Product Code</th>
-   
-   <th style="text-align:center;width:100px;">Action <!-- <button type="button" data-func="dt-add" class="btn btn-success btn-xs dt-add">
-					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 
-				</button> --> </th>
-  </tr>
-</thead>
-<tbody>
-{% for row in values %}​​​​
-    <tr>
-       
-        <td>{{ row[0] }}</td>
-        <td><a href="/detail/{{ row [0] }}">{{ row[1] }}</a></td>
-        <td>{{ row[2] }} </td>
-       <td>{{ row[3] }} </td>
-      <td>{{ row[8] }} </td>
-        
-      <td>
-				<!-- <button type="button" class="btn btn-primary btn-xs dt-edit" style="margin-right:16px;">
-					<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-				</button>
-				<button type="button" class="btn btn-success btn-xs dt-add">
-					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-				</button> -->
-<a href="#">Add FG</a>
-      </td>
-    </tr>
-{% endfor %}
-</tbody>
-</table>
-
 <!-- MMC Table -->
+
+
+
 
 </div>
 </div>
