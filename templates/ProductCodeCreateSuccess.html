@@ -11,14 +11,12 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
 <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
-
 <script type="text/javascript">
-$(document).ready( function () {
-      $('#successUpdate').fadeIn(1000);
-   setTimeout(function() { 
-       $('#successUpdate').fadeOut(1000); 
-   }, 5000);
-} );
+$( '#success' ).click(function() {
+ $('#successUpdate').show();
+
+
+});
 </script>
 
 <!-- Bootstrap CSS and JS -->
@@ -191,7 +189,7 @@ $(document).ready( function () {
           <header class="page-header">
             <div class="container-fluid">
 
-              <h2 class="no-margin-bottom">Product Code</h2>
+              <h2 class="no-margin-bottom">Product Code</h2></div>
 	
           </header>
           <!-- Breadcrumb-->
@@ -205,192 +203,91 @@ $(document).ready( function () {
 <div class="container-fluid">
 	<div class="row bg-white has-shadow">
 <!-- Tabs -->
-<div class="container">
 
-  <div class="container">
-    <div class="card">
-      <div class="card-header">
-        <!-- Nav tabs -->
-        <ul class="nav nav-tabs" role="tablist">
-          <li class="nav-item">
-            <a class="nav-link active" data-toggle="tab" href="#detail">Detail</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#edit">Updated</a>
-          </li>
-         
-        </ul>
-      </div>
-    </div>
-  </div>
 
   <!-- Tab panes -->
-  <div class="tab-content">
-    <div id="detail" class="container tab-pane fade"><br>
-      <form >
-{% for row in values %}
-    <fieldset disabled>
-        <div class="form-group row">
-            <label for="Id" class="col-sm-2 col-form-label">Id</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="id1" placeholder= {{ row[0] }}>
-            </div>
-        </div>
-         <div class="form-group row">
-            <label for="name" class="col-sm-2 col-form-label">Name</label>
-            <div class="col-sm-10">
-	<input type="text"  class="form-control" value= "{{ row[1] }}">
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="name" class="col-sm-2 col-form-label">Variant Detail</label>
-            <div class="col-sm-10">
-
-                 {% if row[2] == "" %}
-                  <input type="text"  class="form-control" value= "Not Existing">
-	{% else %}
-                  <input type="text"  class="form-control" value= "{{ row[2] }}">
-	{% endif %}
-            </div>
-        </div>
-          <div class="form-group row">
-            <label for="name" class="col-sm-2 col-form-label">Identifier</label>
-            <div class="col-sm-10">
-	<input type="text"  class="form-control" value= "{{ row[3] }}">
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="name" class="col-sm-2 col-form-label">Variant</label>
-            <div class="col-sm-10">
-	<input type="text"  class="form-control" value= "{{ row[4] }}">
-            </div>
-        </div>
-       <div class="form-group row">
-            <label for="name" class="col-sm-2 col-form-label">Formula Type</label>
-            <div class="col-sm-10">
-	<input type="text"  class="form-control" value= "{{ row[5] }}">
-            </div>
-        </div>
-       <div class="form-group row">
-            <label for="name" class="col-sm-2 col-form-label">Group Code</label>
-            <div class="col-sm-10">
-	<input type="text"  class="form-control" value= "{{ row[6] }}">
-            </div>
-        </div>
-         <div class="form-group row">
-            <label for="name" class="col-sm-2 col-form-label">SKU</label>
-            <div class="col-sm-10">
-	<input type="text"  class="form-control" value= "{{ row[7] }}">
-            </div>
-        </div>
-       <div class="form-group row">
-            <label for="name" class="col-sm-2 col-form-label">Code</label>
-            <div class="col-sm-10">
-	<input type="text"  class="form-control" value= "{{ row[8] }}">
-            </div>
-        </div>
-    </fieldset>
-{% endfor %}
-</form>
-    </div>
-    <div id="edit" class="container tab-pane active"><br>
+<div class="container">  
 
 
-      <form action = "http://localhost:5000/updateSuccess" method = "post">
-<div class="alert alert-success" role="alert" id="successUpdate" >
-  The product code is updated successfully
-</div>
 
-{% for row in values %}
+      <form action = "http://localhost:5000/createSuccess" method = "post">
+
+
     <fieldset>
-        <div class="form-group row">
-            <label for="Id" class="col-sm-2 col-form-label">Id</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="id1" value= "{{ row[0] }}"  name="p_id" readonly >
-            </div>
+           <div class="form-group row">
+            <label for="name" class="col-sm-4 col-form-label"><h1>Create Product Code</h1></label>
+            
         </div>
+<div class="alert alert-success" role="alert" id="successUpdate" >
+  Successfully Created Product Code
+</div>
          <div class="form-group row">
             <label for="name" class="col-sm-2 col-form-label">Name</label>
             <div class="col-sm-10">
-	<input type="text"  class="form-control" value= "{{ row[1] }}"  name="p_name" />
+	<input type="text"  class="form-control" value="{{ p_name }}" name="p_name"  readonly>
             </div>
         </div>
         <div class="form-group row">
             <label for="name" class="col-sm-2 col-form-label">Variant Detail</label>
             <div class="col-sm-10">
 
-                 {% if row[2] == "" %}
-                  <input type="text"  class="form-control" value= "Not Existing" name="v_description">
-	{% else %}
-                  <input type="text"  class="form-control" value= "{{ row[2] }}" name="v_description">
-	{% endif %}
+                 
+                  <input type="text"  class="form-control"  name="v_description" value="{{ v_description }}" readonly>
+	
             </div>
         </div>
           <div class="form-group row">
             <label for="name" class="col-sm-2 col-form-label">Identifier</label>
             <div class="col-sm-10">
-	<input type="text"  class="form-control" value= "{{ row[3] }}" name="p_identifier">
+	<input type="text"  class="form-control"  name="p_identifier" value="{{ identiier }}" readonly>
             </div>
         </div>
         <div class="form-group row">
             <label for="name" class="col-sm-2 col-form-label">Variant</label>
             <div class="col-sm-10">
-	<input type="text"  class="form-control" value= "{{ row[4] }}" name="p_variant">
+	<input type="text"  class="form-control"  name="p_variant" value="{{ variant }}" readonly>
             </div>
         </div>
        <div class="form-group row">
             <label for="name" class="col-sm-2 col-form-label">Formula Type</label>
-            <div class="col-sm-10">
-	 <select name="f_type" class="selectpicker form-control">
-              {% for o in f_types %}
-	{% if o.name == row[5] %}
-		 <option value="{{ o.name }}" selected>{{ o.name }}</option>
-	{% else %}
-              <option value="{{ o.name }}">{{ o.name }}</option>
-	{% endif %}
-              {% endfor %}                                              
-            </select>
+            
+           <div class="col-sm-10">
+
+        <input type="text"  class="form-control"  name="f_type" value="{{ f_type }}" readonly>
             </div>
         </div>
        <div class="form-group row">
             <label for="name" class="col-sm-2 col-form-label">Group Code</label>
             <div class="col-sm-10">
-	 <select name="g_code" class="selectpicker form-control">
-              		{% for o in g_codes %}
-			{% if o.name == row[6] %}
-		 		<option value="{{ o.name }}" selected>{{ o.name }}</option>
-			{% else %}
-           				   <option value="{{ o.name }}">{{ o.name }}</option>
-			{% endif %}
-              		{% endfor %}                                              
-            </select>
+	<input type="text"  class="form-control"  name="g_code" value="{{ g_code }}" readonly>
             </div>
         </div>
          <div class="form-group row">
             <label for="name" class="col-sm-2 col-form-label">SKU</label>
             <div class="col-sm-10">
-	<input type="text"  class="form-control" value= "{{ row[7] }}" name="sku" >
+	<input type="text"  class="form-control" " name="sku"  value="{{ sku }}" readonly>
             </div>
         </div>
-
-<div class="form-group row">
-            <div class="col-sm-0 offset-sm-11">
-	<input type="submit" class="btn btn-primary" value="Update">
+ <div class="form-group row">
+            <label for="name" class="col-sm-2 col-form-label">Product Code</label>
+            <div class="col-sm-10">
+	<input type="text"  class="form-control" " name="p_code"  value="{{ p_code }}" readonly>
             </div>
         </div>
-
+       <div class="form-group row">
+           <div class="form-group col-sm-0 offset-sm-10" >
+	 <input type="submit" class="btn btn-secondary" value="Cancel"  name="action">
+           
+	
+           
+	</div>
         </div>
     </fieldset>
-{% endfor %}
-</form>
-    </div>
-    <div id="menu2" class="container tab-pane fade"><br>
-      <h3>Menu 2</h3>
-      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
-    </div>
-  </div>
-</div>
 
+</form>
+ </div>  
+</div>
+</div>
 
 <!-- MMC MySQL DataTable -->
 
@@ -399,8 +296,7 @@ $(document).ready( function () {
 
 
 
-</div>
-</div>
+
           </section>
           <!-- Page Footer-->
          <!--  <footer class="main-footer">
