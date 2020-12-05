@@ -216,6 +216,9 @@ $( '#success' ).click(function() {
           <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="#edit">Edit</a>
           </li>
+           <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#duplicate">Duplicate</a>
+          </li>
          
         </ul>
       </div>
@@ -327,7 +330,7 @@ $( '#success' ).click(function() {
           <div class="form-group row">
             <label for="name" class="col-sm-2 col-form-label">Identifier</label>
             <div class="col-sm-10">
-	<input type="text"  class="form-control" value= "{{ row[3] }}" name="p_identifier">
+	<input type="text"  class="form-control" value= "{{ row[3] }}" name="p_identifier" readonly>
             </div>
         </div>
         <div class="form-group row">
@@ -345,11 +348,11 @@ $( '#success' ).click(function() {
 
         
             <select name="f_type" class="selectpicker form-control">
-              {% for o in f_types %}
-	{% if o.name == row[5] %}
-		 <option value="{{ o.name }}" selected>{{ o.name }}</option>
+              {% for f_type in f_types %}
+	{% if f_type[0] == row[10] %}
+		 <option value="{{ f_type[0] }}" selected>{{ f_type[2] }}</option>
 	{% else %}
-              <option value="{{ o.name }}">{{ o.name }}</option>
+              <option value="{{ f_type[0] }}">{{ f_type[2] }}</option>
 	{% endif %}
               {% endfor %}                                              
             </select>
@@ -359,11 +362,11 @@ $( '#success' ).click(function() {
             <label for="name" class="col-sm-2 col-form-label">Group Code</label>
             <div class="col-sm-10">
 	 <select name="g_code" class="selectpicker form-control">
-              {% for o in g_codes %}
-	{% if o.name == row[6] %}
-		 <option value="{{ o.name }}" selected>{{ o.name }}</option>
+              {% for g_code in g_codes %}
+	{% if g_code[0] == row[11] %}
+		 <option value="{{ g_code[0] }}" selected>{{ g_code[2] }}</option>
 	{% else %}
-              <option value="{{ o.name }}">{{ o.name }}</option>
+              <option value="{{ g_code[0] }}">{{ g_code[2] }}</option>
 	{% endif %}
               {% endfor %}                                              
             </select>
@@ -384,6 +387,80 @@ $( '#success' ).click(function() {
 {% endfor %}
 </form>
     </div>
+
+ <div id="duplicate" class="container tab-pane fade"><br>
+
+
+      <form action = "http://localhost:5000/duplicateSuccess" method = "post">
+<div class="alert alert-success" role="alert" id="successUpdate" style="display:none;">
+  This is a success alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+</div>
+
+{% for row in values %}
+    <fieldset>
+        <!-- <div class="form-group row">
+            <label for="Id" class="col-sm-2 col-form-label">Id</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="id1" value= "{{ row[0] }}"  name="p_id" readonly >
+            </div>
+        </div> -->
+         <div class="form-group row">
+            <label for="name" class="col-sm-2 col-form-label">Name</label>
+            <div class="col-sm-10">
+	<input type="text"  class="form-control" value= "{{ row[1] }}"  name="p_name" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="name" class="col-sm-2 col-form-label">Variant Detail</label>
+            <div class="col-sm-10">
+
+                 {% if row[2] == "" %}
+                  <input type="text"  class="form-control" value= "Not Existing" name="v_description">
+	{% else %}
+                  <input type="text"  class="form-control" value= "{{ row[2] }}" name="v_description">
+	{% endif %}
+            </div>
+        </div>
+          <div class="form-group row">
+            <label for="name" class="col-sm-2 col-form-label">Identifier</label>
+            <div class="col-sm-10">
+	<input type="text"  class="form-control" value= "{{ row[3] }}" name="p_identifier" readonly>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="name" class="col-sm-2 col-form-label">Variant</label>
+            <div class="col-sm-10">
+	<input type="text"  class="form-control" value= "{{ row[4] }}" name="p_variant">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="name" class="col-sm-2 col-form-label">Formula Type</label>
+            <div class="col-sm-10">
+	<input type="text"  class="form-control" value= "{{ row[5] }}"  name="f_type" readonly >
+            </div>
+        </div>
+     <div class="form-group row">
+            <label for="name" class="col-sm-2 col-form-label">Group Code</label>
+            <div class="col-sm-10">
+	<input type="text"  class="form-control" value= "{{ row[6] }}"  name="g_code" readonly>
+            </div>
+        </div>
+         <div class="form-group row">
+            <label for="name" class="col-sm-2 col-form-label">SKU</label>
+            <div class="col-sm-10">
+	<input type="text"  class="form-control" value= "{{ row[7] }}" name="sku" >
+            </div>
+        </div>
+       <div class="form-group row">
+            <div class="col-sm-0 offset-sm-11">
+	<input type="submit" class="btn btn-primary" name="action" value="Duplicate">
+            </div>
+        </div>
+    </fieldset>
+{% endfor %}
+</form>
+    </div>
+
     <div id="menu2" class="container tab-pane fade"><br>
       <h3>Menu 2</h3>
       <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
