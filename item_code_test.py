@@ -156,8 +156,12 @@ def createSuccess():
             
             return ("Fail")
       else:
-         f_types = [{'name':'EC'}, {'name':'SC'}, {'name':'SL'}, {'name' : 'WP'}, {'name' : 'WP'}, {'name' : 'WP'}, {'name' : 'SP'}, {'name' : 'GR'}, {'name' : 'WG'}, {'name' : 'TA'}, {'name' : 'OD'}, {'name' : 'FS'}, {'name' : 'DF'}, {'name' : 'CP'}, {'name' : 'FB'},  {'name' : 'OT'}, {'name' : 'SE'} ]
-         g_codes = [{'name':'IN'}, {'name':'HE'}, {'name':'FU'}, {'name' : 'NF'}, {'name' : 'PG'}, {'name' : 'NE'}, {'name' : 'BA'}, {'name' : 'RO'}, {'name' : 'ST'}, {'name' : 'NC'}, {'name' : 'FB'}, {'name' : 'MO'}, {'name' : 'FT'}, {'name' : 'BP'}, {'name' : 'NS'},  {'name' : 'NT'}, {'name' : 'NA'}, {'name' : 'IF'}, {'name' : 'SU'}  ]
+         mysqldb=mysql.connector.connect(host="localhost",user="root",password="",database="itemcode")
+         mycursor=mysqldb.cursor()
+         mycursor.execute('select * from formulatype')
+         f_types=mycursor.fetchall()
+         mycursor.execute('select * from groupcode')
+         g_codes=mycursor.fetchall()
          return render_template('ProductCodeCreate.html', f_types=f_types, g_codes=g_codes)
    else:
       user = request.args.get('nm')

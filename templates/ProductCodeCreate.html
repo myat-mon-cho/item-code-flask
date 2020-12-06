@@ -11,6 +11,28 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
 <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
+<!-- Script for form validation -->
+<script>
+(function() {
+'use strict';
+window.addEventListener('load', function() {
+// Fetch all the forms we want to apply custom Bootstrap validation styles to
+var forms = document.getElementsByClassName('needs-validation');
+// Loop over them and prevent submission
+var validation = Array.prototype.filter.call(forms, function(form) {
+form.addEventListener('submit', function(event) {
+if (form.checkValidity() === false) {
+event.preventDefault();
+event.stopPropagation();
+}
+form.classList.add('was-validated');
+}, false);
+});
+}, false);
+})();
+</script>
+
+
 <script type="text/javascript">
 $( '#success' ).click(function() {
  $('#successUpdate').show();
@@ -210,7 +232,7 @@ $( '#success' ).click(function() {
 
 
 
-      <form action = "http://localhost:5000/createConfirm" method = "post">
+      <form action = "http://localhost:5000/createConfirm" method = "post" class="needs-validation" novalidate>
 
 
     <fieldset>
@@ -224,7 +246,10 @@ $( '#success' ).click(function() {
          <div class="form-group row">
             <label for="name" class="col-sm-2 col-form-label">Name</label>
             <div class="col-sm-10">
-	<input type="text"  class="form-control"  name="p_name" />
+	<input type="text"  class="form-control"  name="p_name" required>
+	<div class="invalid-feedback">
+        		Please provide the product name.
+    	 </div>
             </div>
         </div>
         <div class="form-group row">
@@ -245,7 +270,10 @@ $( '#success' ).click(function() {
         <div class="form-group row">
             <label for="name" class="col-sm-2 col-form-label">Variant</label>
             <div class="col-sm-10">
-	<input type="text"  class="form-control"  name="p_variant">
+	<input type="text"  class="form-control"  name="p_variant" required>
+	<div class="invalid-feedback">
+        		Please specify the variant.
+    	 </div>
             </div>
         </div>
        <div class="form-group row">
@@ -278,7 +306,10 @@ $( '#success' ).click(function() {
          <div class="form-group row">
             <label for="name" class="col-sm-2 col-form-label">SKU</label>
             <div class="col-sm-10">
-	<input type="text"  class="form-control" " name="sku" >
+	<input type="text"  class="form-control" " name="sku"  required>
+	<div class="invalid-feedback">
+        		Please define the sku.
+    	 </div>
             </div>
         </div>
        <div class="form-group row">
